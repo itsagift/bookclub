@@ -1,5 +1,6 @@
-.App {
+.App-header {
   text-align: center;
+  margin-top: -20vh;
 }
 
 .App-logo {
@@ -7,6 +8,15 @@
   pointer-events: none;
 }
 
-
-
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  /* background-color: pink; */
+}
 
