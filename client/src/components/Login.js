@@ -1,4 +1,4 @@
-const Login = ({ username, setUsername, password, setPassword }) => {
+const Login = ({ username, setUsername, password, setPassword, onLogin }) => {
 
     const handleLogin = async () => {
         let req = await fetch('/login', {
@@ -8,7 +8,7 @@ const Login = ({ username, setUsername, password, setPassword }) => {
         })
         let res = await req.json()
         if (req.status === 201) {
-          alert('Login successful! HONK')
+          onLogin(res.username)
         }
         else {
           alert(res.error)

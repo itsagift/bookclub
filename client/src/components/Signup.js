@@ -4,7 +4,7 @@ const Signup = ({ username, setUsername, email, setEmail, password, setPassword,
         let req = await fetch('/signup', {
           method: "POST",
           headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({username, password, password_confirmation: passwordConfirmation})
+          body: JSON.stringify({username, email, password, password_confirmation: passwordConfirmation})
         })
     }
     
