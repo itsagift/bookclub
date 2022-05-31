@@ -1,5 +1,8 @@
 import './App.css';
 import { useState } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import Login from './components/Login';
+import Signup from './components/Signup';
 
 function App() {
 
@@ -20,20 +23,32 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src="/GooseLogo.png" className="App-logo" alt="logo" />
-        <form className="login" action="/signup" method="POST" onSubmit={(e) => {
-          e.preventDefault();
-          handleSignUp()
-        }}>
-          {/* <input type="text" name="user[username]"></input>
-          <input type="password" name="user[password]"></input>
-          <input type="password" name="user[password_confirmation]"></input>
-          <input type="submit"></input> */}
-          <input type="text" onChange={(e) => setUsername(e.target.value)} value={username} placeholder="Username"></input>
-          <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email"></input>
-          <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password"></input>
-          <input type="password" onChange={(e) => setPasswordConfirmation(e.target.value)} value={passwordConfirmation} placeholder="Confirm Password"></input>
-          <input type="submit"></input>
-        </form>
+        <Link to="/new-user">
+          Sign Up
+        </Link>
+        <Link to="/existing-user">
+          Login
+        </Link>
+        <Routes>
+          <Route exact path="new-user" element={<Signup 
+            username={username} 
+            password={password} 
+            passwordConfirmation={passwordConfirmation} 
+            email={email}
+            setUsername={setUsername}
+            setPassword={setPassword}
+            setPasswordConfirmation={setPasswordConfirmation}
+            setEmail={setEmail}
+          />}>
+          </Route>
+          <Route exact path="existing-user" element={<Login
+            username={username} 
+            password={password} 
+            setUsername={setUsername}
+            setPassword={setPassword}
+          />}>
+          </Route>
+        </Routes>
       </header>
     </div>
   );
