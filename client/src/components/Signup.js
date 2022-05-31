@@ -1,7 +1,6 @@
 const Signup = ({ username, setUsername, email, setEmail, password, setPassword, passwordConfirmation, setPasswordConfirmation }) => {
 
     const handleSignUp = async () => {
-        let form = new FormData(document.querySelector('.login'))
         let req = await fetch('/signup', {
           method: "POST",
           headers: {"Content-Type": "application/json"},
