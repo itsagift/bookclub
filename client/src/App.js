@@ -7,6 +7,7 @@ import SignupForm from './components/SignupForm';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [postTest, setPostTest] = useState([]);
 
   useEffect(() => {
     async function fetchUser(){
@@ -17,6 +18,15 @@ function App() {
       }
     }
     fetchUser();
+  }, []);
+
+  useEffect(() => {
+    async function fetchClubs(){
+      let req = await fetch('/clubs')
+      let res = await req.json();
+      setPostTest(res)
+    }
+    fetchClubs();
   }, []);
 
   async function handleLogout(){
@@ -33,6 +43,14 @@ function App() {
       <header className="App-header">
         <div>Username is {user}</div>
         <button onClick={()=> handleLogout()}>Logout</button>
+
+        {
+          postTest.map((club) => {
+            return(
+              <div>{club.admin.username}</div>
+            )
+          })
+        }
         
         {/* <Link to="/new-user">
           Sign Up
