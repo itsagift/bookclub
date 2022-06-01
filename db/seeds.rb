@@ -1,10 +1,10 @@
 
 puts 'Creating  users'
-u1 = User.create(username: "user1", email: "user1@example.com", password:"123", password_confirmation:"123")
-u2 = User.create(username: "user2", email: "user2@example.com", password:"1234", password_confirmation:"1234")
-u3 = User.create(username: "user3", email: "user3@example.com", password:"12345", password_confirmation:"12345")
-u4 = User.create(username: "user4", email: "user4@example.com", password:"123456", password_confirmation:"123456")
-u5 = User.create(username: "user5", email: "user5@example.com", password:"1234567", password_confirmation:"1234567")
+u1 = User.create(username: "MotherGoose", email: "mg@example.com", password:"123", password_confirmation:"123")
+u2 = User.create(username: "Chase", email: "chase@example.com", password:"1234", password_confirmation:"1234")
+u3 = User.create(username: "Gautam", email: "gautam@example.com", password:"12345", password_confirmation:"12345")
+u4 = User.create(username: "John", email: "john@example.com", password:"123456", password_confirmation:"123456")
+u5 = User.create(username: "Liz", email: "liz@example.com", password:"1234567", password_confirmation:"1234567")
 
 
 puts 'Creating Clubs'
