@@ -26,7 +26,7 @@ const LoginForm = ({setUser}) => {
     
 
     return (
-        <form className="login" action="/login" method="POST" onSubmit={(e) => {
+        <form className="account-form" action="/login" method="POST" onSubmit={(e) => {
             e.preventDefault();
             handleLogin()
             }}>

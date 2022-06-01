@@ -24,7 +24,7 @@ const SignupForm = ({setUser}) => {
     }
     
     return (
-        <form className="signup" action="/signup" method="POST" onSubmit={(e) => {
+        <form className="account-form" onSubmit={(e) => {
             e.preventDefault();
             handleSignUp()
             }}>

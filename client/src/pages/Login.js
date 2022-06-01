@@ -5,7 +5,7 @@ import {useState} from 'react';
 function Login ({setUser}) {
   const [loginVisible, setLoginVisible] = useState(true); 
 return(
-  <div>
+  <div className="login-form">
     <img src="/GooseLogo.png" className="App-logo" alt="logo" />
     {
       loginVisible ? 
