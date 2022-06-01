@@ -1,4 +1,12 @@
-const Login = ({ username, setUsername, password, setPassword, onLogin }) => {
+
+import {useState} from 'react';
+
+const LoginForm = ({setUser}) => {
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  // const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  // const [email, setEmail] = useState('')
 
     const handleLogin = async () => {
         let req = await fetch('/login', {
@@ -8,7 +16,7 @@ const Login = ({ username, setUsername, password, setPassword, onLogin }) => {
         })
         let res = await req.json()
         if (req.status === 201) {
-          onLogin(res.username)
+          setUser(res.username)
         }
         else {
           alert(res.error)
@@ -24,9 +32,9 @@ const Login = ({ username, setUsername, password, setPassword, onLogin }) => {
             }}>
             <input type="text" onChange={(e) => setUsername(e.target.value)} value={username} placeholder="Username"></input>
             <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password"></input>
-            <input type="submit"></input>
+            <input type="submit" value="Login"></input>
           </form>
     )
 }
 
-export default Login;
+export default LoginForm;

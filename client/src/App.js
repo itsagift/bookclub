@@ -1,15 +1,11 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
-import Login from './components/Login';
-import Signup from './components/Signup';
+import LoginForm from './components/LoginForm';
+import Login from './pages/Login';
+import SignupForm from './components/SignupForm';
 
 function App() {
-
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirmation, setPasswordConfirmation] = useState('')
-  const [email, setEmail] = useState('')
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -23,10 +19,6 @@ function App() {
     fetchUser();
   }, []);
 
-  function onLogin(username){
-    setUser(username)
-  }
-
   async function handleLogout(){
     let req = await fetch('/logout', {
       method: "DELETE"
@@ -34,12 +26,15 @@ function App() {
     setUser(null)
   }
 
+  if (!user) return <Login setUser={setUser} />;
+
   return (
     <div className="App">
       <header className="App-header">
         <div>Username is {user}</div>
-        <img src="/GooseLogo.png" className="App-logo" alt="logo" />
-        <Link to="/new-user">
+        <button onClick={()=> handleLogout()}>Logout</button>
+        
+        {/* <Link to="/new-user">
           Sign Up
         </Link>
         <Link to="/existing-user">
@@ -66,7 +61,7 @@ function App() {
             onLogin={onLogin}
           />}>
           </Route>
-        </Routes>
+        </Routes> */}
       </header>
     </div>
   );

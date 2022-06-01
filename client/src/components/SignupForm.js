@@ -1,4 +1,11 @@
-const Signup = ({ username, setUsername, email, setEmail, password, setPassword, passwordConfirmation, setPasswordConfirmation }) => {
+import {useState} from 'react';
+
+const SignupForm = ({setUser}) => {
+
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirmation, setPasswordConfirmation] = useState('')
+  const [email, setEmail] = useState('')
 
     const handleSignUp = async () => {
         let req = await fetch('/signup', {
@@ -6,6 +13,14 @@ const Signup = ({ username, setUsername, email, setEmail, password, setPassword,
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify({username, email, password, password_confirmation: passwordConfirmation})
         })
+        let res = await req.json();
+        if (req.ok) {
+          setUser(res.username)
+        }
+        else {
+          alert(res.error)
+          // console.log(res.error)
+        }
     }
     
     return (
@@ -17,9 +32,9 @@ const Signup = ({ username, setUsername, email, setEmail, password, setPassword,
             <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email"></input>
             <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password"></input>
             <input type="password" onChange={(e) => setPasswordConfirmation(e.target.value)} value={passwordConfirmation} placeholder="Confirm Password"></input>
-            <input type="submit"></input>
+            <input type="submit" value="Sign Up"></input>
           </form>
     )
 }
 
-export default Signup
+export default SignupForm;
