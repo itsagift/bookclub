@@ -28,11 +28,11 @@ const SignupForm = ({setUser}) => {
             e.preventDefault();
             handleSignUp()
             }}>
-            <input type="text" onChange={(e) => setUsername(e.target.value)} value={username} placeholder="Username"></input>
-            <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email"></input>
-            <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password"></input>
-            <input type="password" onChange={(e) => setPasswordConfirmation(e.target.value)} value={passwordConfirmation} placeholder="Confirm Password"></input>
-            <input type="submit" value="Sign Up"></input>
+            <input type="text" className="input-text" onChange={(e) => setUsername(e.target.value)} value={username} placeholder="Username"></input>
+            <input type="email" className="input-text" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email"></input>
+            <input type="password" className="input-text" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password"></input>
+            <input type="password" className="input-text" onChange={(e) => setPasswordConfirmation(e.target.value)} value={passwordConfirmation} placeholder="Confirm Password"></input>
+            <input type="submit" className='form-button' value="Sign Up"></input>
           </form>
     )
 }

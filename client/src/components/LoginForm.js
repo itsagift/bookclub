@@ -30,9 +30,9 @@ const LoginForm = ({setUser}) => {
             e.preventDefault();
             handleLogin()
             }}>
-            <input type="text" onChange={(e) => setUsername(e.target.value)} value={username} placeholder="Username"></input>
-            <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password"></input>
-            <input type="submit" value="Login"></input>
+            <input type="text" className="input-text" onChange={(e) => setUsername(e.target.value)} value={username} placeholder="Username"></input>
+            <input type="password" className="input-text" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password"></input>
+            <input type="submit" className='form-button' value="Login"></input>
           </form>
     )
 }
