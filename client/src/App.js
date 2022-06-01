@@ -20,15 +20,6 @@ function App() {
     fetchUser();
   }, []);
 
-  useEffect(() => {
-    async function fetchClubs(){
-      let req = await fetch('/clubs')
-      let res = await req.json();
-      setPostTest(res)
-    }
-    fetchClubs();
-  }, []);
-
   async function handleLogout(){
     let req = await fetch('/logout', {
       method: "DELETE"
@@ -44,13 +35,6 @@ function App() {
         <div>Username is {user}</div>
         <button onClick={()=> handleLogout()}>Logout</button>
 
-        {
-          postTest.map((club) => {
-            return(
-              <div>{club.admin.username}</div>
-            )
-          })
-        }
         
         {/* <Link to="/new-user">
           Sign Up

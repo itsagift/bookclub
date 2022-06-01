@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+    skip_before_action :authorize, only: :create
 
     def create # for signing up + logging in
         user = User.find_by(username: params[:username])
