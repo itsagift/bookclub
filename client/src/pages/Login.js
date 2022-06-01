@@ -12,12 +12,12 @@ return(
       (
         <>
         <LoginForm setUser={setUser}/>
-        <button onClick={()=> setLoginVisible(false)}>Signup</button>
+        <button className="login-button" onClick={()=> setLoginVisible(false)}>Signup</button>
         </>
       ) : (
         <>
         <SignupForm setUser={setUser}/>
-        <button onClick={()=> setLoginVisible(true)}>Return to Login</button>
+        <button className="login-button" onClick={()=> setLoginVisible(true)}>Return to Login</button>
         </>
       )
     }

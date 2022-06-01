@@ -20,3 +20,18 @@ body {
   /* background-color: pink; */
 }
 
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2rem;
+  margin: 10px;
+  gap: 10px;
+  font-family: Brush Script MT;
+}
+
+.login-button {
+  margin-left: 38%;
+}
+

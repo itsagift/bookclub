@@ -32,7 +32,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <div>Username is {user}</div>
-        <button onClick={()=> handleLogout()}>Logout</button>
+        <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
         
         {/* <Link to="/new-user">
           Sign Up
