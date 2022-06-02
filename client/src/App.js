@@ -29,6 +29,10 @@ function App() {
     setUser(null)
   }
 
+  function handleCreateClub(){
+    alert('Clicked')
+  }
+
   if (!user) return <Login setUser={setUser} />;
 
   return (
@@ -36,7 +40,7 @@ function App() {
       <div>Username is {user}</div>
       <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
         <div className='dashboard'>
-          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub}/>
+          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} handleCreateClub={handleCreateClub}/>
           Selected Club: {selectedClub}
         </div>
     </div>
