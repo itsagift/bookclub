@@ -62,7 +62,7 @@ function ClubList({setSelectedClub, selectedClub, handleCreateClub}) {
         {listMap(memberClubs)}
       </ul>
     }
-    <button onClick={handleCreateClub}>
+    <button className="create-club-button" onClick={handleCreateClub}>
       Create A Club
     </button>
     </div>

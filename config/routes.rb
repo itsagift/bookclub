@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get '/userclubs', to: 'users#clubs'
 
+  post '/newclub', to: "clubs#create"
+
   # get '/clubs', to: 'clubs#index'
   # post '/clubs', to: 'clubs#create'
   # delete '/clubs/:id', to: 'clubs#destroy'
