@@ -40,7 +40,7 @@ function App() {
 
   async function handleBookClick(){
     
-    let req = await fetch("/newbook", {
+    let req = await fetch(`/${selectedClub.id}/newbook`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({"club_id": `${selectedClub.id}`, "title": "test", "author": "test author"})
@@ -50,7 +50,7 @@ function App() {
         setBooks(prevState => [...prevState, res])
     }
     else {
-      alert(res.errors)
+      alert(res.error)
           // console.log(res.error)
     }
   }

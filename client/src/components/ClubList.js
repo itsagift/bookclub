@@ -12,7 +12,7 @@ function ClubList({setSelectedClub, selectedClub}) {
       let res = await req.json();
       console.log(res)
       setClubList(res.memberships)
-      console.log(res)
+      setSelectedClub(res.memberships[0].club)
     }
   }
   fetchClubs();
@@ -35,7 +35,7 @@ function ClubList({setSelectedClub, selectedClub}) {
     clubName.map((club) => {
       return(
         <li 
-          className={selectedClub === club.club.name ? "club-name selected" : "club-name"}  
+          className={selectedClub.name === club.club.name ? "club-name selected" : "club-name"}  
           onClick={()=> setSelectedClub(
             {"name": club.club.name, "id": club.club.id, "description": club.club.description})}>
           {club.club.name}

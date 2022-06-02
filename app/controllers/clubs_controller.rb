@@ -1,6 +1,9 @@
 class ClubsController < ApplicationController
   before_action :authorize_club
+  before_action :authorize_admin
+
   skip_before_action :authorize_club, only: [:index, :create, :destroy, :createbook]
+  skip_before_action :authorize_admin, only: [:index, :create, :destroy, :books]
   # @current_user = User.find_by(id: session[:user_id])
 
   # @members = Club.memberships.all.each do |membership|
@@ -49,5 +52,11 @@ class ClubsController < ApplicationController
   def authorize_club
     return render json: { error: "Not authorized" }, status: :unauthorized unless Membership.exists?(club_id: params[:id], user_id: @current_user.id)
   end
+
+  def authorize_admin
+    return render json: { error: "Not authorized" }, status: :unauthorized unless Membership.exists?(club_id: params[:id], user_id: @current_user.id, admin: true)
+  end
+
+  
     
 end
