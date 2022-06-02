@@ -18,7 +18,7 @@ const SignupForm = ({setUser}) => {
           setUser(res.username)
         }
         else {
-          alert(res.error)
+          alert(res.errors)
           // console.log(res.error)
         }
     }

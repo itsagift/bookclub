@@ -1,14 +1,12 @@
 class UsersController < ApplicationController
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     skip_before_action :authorize, only: :create
     
     def create
         user = User.create!(user_params)
-        if user.valid?
-            session[:user_id] = user.id
-            render json: user, status: :created
-        else
-            render json: { error: user.errors.full_messages }, status: :unprocessable_entity
-        end
+        session[:user_id] = user.id
+        render json: user, status: :created
+        
     end
 
     def show
@@ -24,4 +22,8 @@ class UsersController < ApplicationController
     def user_params
         params.permit(:username, :email, :password, :password_confirmation)
     end
+
+    def render_unprocessable_entity_response(exception)
+        render json: { errors: exception }, status: :unprocessable_entity
+      end
 end
