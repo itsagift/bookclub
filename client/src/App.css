@@ -8,6 +8,19 @@
   pointer-events: none;
 }
 
+
+@keyframes swinging{
+  0%{transform: rotate(4deg);}
+  50%{transform: rotate(-12deg)}
+  100%{transform: rotate(4deg);}
+}
+
+.App-logo{
+  transform-origin: 50% 50%;
+  animation: swinging 10s ease-in-out forwards infinite;
+}
+
+
 body {
   display: flex;
   flex-direction: column;
@@ -26,9 +39,8 @@ body {
   flex-direction: column;
   align-items: center;
   font-size: 2rem;
-  
-  
 }
+
 .input-text {
   font-family: 'Patrick Hand SC';
   font-size: 1.25rem;
