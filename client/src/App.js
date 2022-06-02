@@ -23,20 +23,12 @@ function App() {
     fetchUser();
   }, []);
 
-  async function handleLogout(){
-    let req = await fetch('/logout', {
-      method: "DELETE"
-    })
-    setUser(null)
-  }
-
   if (!user) return <div><NavBar /><Login setUser={setUser} /></div>;
 
   return (
     <div className="App">
-      <NavBar setUser={setUser}/>
+      <NavBar user={user} setUser={setUser}/>
       <div>Username is {user}</div>
-      <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
         <div className='dashboard'>
           <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub}/>
           Selected Club: {selectedClub}
