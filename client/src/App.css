@@ -22,14 +22,7 @@
 
 
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100vh;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+  
   /* background-color: pink; */
 }
 .account-form {
@@ -79,4 +72,49 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 15vh;
+}
+
+.dashboard{
+  display: flex;
+}
+
+.club-list-container{
+  border: 1px solid #bbb;
+  padding: 10px 30px 10px 10px;
+}
+
+.club-sublist{
+  list-style: none;
+  padding: 10px;
+
+}
+.club-list-title{
+  font-weight: normal;
+  font-size: 16pt;
+  border-bottom: 1px solid #bbb;
+  width: max-content;
+  margin-top: 0;
+  margin-bottom: 5px;
+  opacity: 0.7;
+}
+
+.club-name{
+  font-size: 18px;
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+
+.club-name:hover{
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.selected{
+  opacity: 1;
+}
+
+
+.admin{
+  background-color: rgb(255, 255, 192);
 }

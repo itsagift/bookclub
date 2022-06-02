@@ -9,6 +9,7 @@ import ClubList from './components/ClubList';
 function App() {
   const [user, setUser] = useState(null);
   const [postTest, setPostTest] = useState([]);
+  const [selectedClub, setSelectedClub] = useState("");
 
   useEffect(() => {
     async function fetchUser(){
@@ -32,14 +33,12 @@ function App() {
 
   return (
     <div className="App">
+      <div>Username is {user}</div>
+      <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
         <div className='dashboard'>
-
+          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub}/>
+          Selected Club: {selectedClub}
         </div>
-        <div>Username is {user}</div>
-        <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
-
-        <ClubList/>
-        
     </div>
   );
 }

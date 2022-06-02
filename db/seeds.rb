@@ -13,6 +13,7 @@ c2 = Club.create(name: "Banned Books For Rebel Geese", description: "First rule 
 
 puts 'Creating Memberships'
 m1 = Membership.create(user_id: u1.id, club_id: c1.id, admin: true)
+m1 = Membership.create(user_id: u1.id, club_id: c2.id, admin: false)
 m2 = Membership.create(user_id: u2.id, club_id: c2.id, admin: true)
 m3 = Membership.create(user_id: u3.id, club_id: c1.id, admin: false)
 m4 = Membership.create(user_id: u4.id, club_id: c1.id, admin: false)

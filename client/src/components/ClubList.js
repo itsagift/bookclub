@@ -2,10 +2,9 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 
 
-function ClubList() {
+function ClubList({setSelectedClub, selectedClub}) {
 
   const [clubList, setClubList] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
   async function fetchClubs(){
@@ -32,26 +31,32 @@ function ClubList() {
 
   return(
     <div className="club-list-container">
+      <h2 className='club-list-header'>Your Clubs</h2>
           {
             adminClubs.length > 0 && 
-            <ul className='club-sublist'>
-              <div className='club-list-title'>Admin</div>
+            <ul className='club-sublist admin'>
+              <h4 className='club-list-title'>Admin</h4>
               {adminClubs.map((club) => {
                 return(
-                  <li>
+                  <li 
+                    className={selectedClub === club.club.name ? "club-name selected" : "club-name"}  
+                    onClick={()=> setSelectedClub(club.club.name)}>
                     {club.club.name}
                   </li>
                 )
               })}
             </ul>
           }
+          
           {
             memberClubs.length > 0 && 
             <ul className='club-sublist member'>
-              <div className='club-list-title'>Member</div>
+              <h4 className='club-list-title'>Member</h4>
               {memberClubs.map((club) => {
                 return(
-                  <li>
+                  <li 
+                    className={selectedClub === club.club.name ? "club-name selected" : "club-name"} 
+                    onClick={()=> setSelectedClub(club.club.name)}>
                     {club.club.name}
                   </li>
                 )
