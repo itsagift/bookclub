@@ -10,6 +10,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [postTest, setPostTest] = useState([]);
   const [selectedClub, setSelectedClub] = useState("");
+  const [selectedDesc, setSelectedDesc] = useState("");
 
   useEffect(() => {
     async function fetchUser(){
@@ -36,8 +37,10 @@ function App() {
       <div>Username is {user}</div>
       <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
         <div className='dashboard'>
-          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub}/>
-          Selected Club: {selectedClub}
+          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} setSelectedDesc={setSelectedDesc} selectedDesc={selectedDesc}/>
+          <div className="selected-club"> Selected Club: {selectedClub}
+          Description: {selectedDesc}
+          </div> 
         </div>
     </div>
   );

@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 
 
-function ClubList({setSelectedClub, selectedClub}) {
+function ClubList({setSelectedClub, selectedClub, selectedDesc, setSelectedDesc}) {
 
   const [clubList, setClubList] = useState([]);
 
@@ -11,6 +11,7 @@ function ClubList({setSelectedClub, selectedClub}) {
     let req = await fetch('/userclubs')
     if (req.ok){
       let res = await req.json();
+      console.log(res)
       setClubList(res.memberships)
     }
   }
@@ -36,7 +37,7 @@ function ClubList({setSelectedClub, selectedClub}) {
       return(
         <li 
           className={selectedClub === club.club.name ? "club-name selected" : "club-name"}  
-          onClick={()=> setSelectedClub(club.club.name)}>
+          onClick={()=> {setSelectedClub(club.club.name); setSelectedDesc(club.club.description)}}>
           {club.club.name}
         </li>
       )

@@ -119,3 +119,9 @@ body {
 .admin{
   background-color: rgb(255, 255, 192);
 }
+
+.selected-club{
+
+  margin-left: 5%;
+  padding: 5%;
+}
