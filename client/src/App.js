@@ -11,6 +11,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [postTest, setPostTest] = useState([]);
   const [selectedClub, setSelectedClub] = useState("");
+  const [formVisible, setFormVisible] = useState(false)
 
   useEffect(() => {
     async function fetchUser(){
@@ -31,7 +32,7 @@ function App() {
   }
 
   function handleCreateClub(){
-    alert('Clicked')
+    setFormVisible(true)
   }
 
   if (!user) return <Login setUser={setUser} />;
@@ -43,8 +44,8 @@ function App() {
       <div className='dashboard'>
         <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} handleCreateClub={handleCreateClub}/>
         Selected Club: {selectedClub}
-        <CreateClubForm />
       </div>
+      <CreateClubForm formVisible={formVisible} setFormVisible={setFormVisible}/>
     </div>
   );
 }

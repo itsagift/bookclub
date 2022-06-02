@@ -119,3 +119,14 @@ body {
 .admin{
   background-color: rgb(255, 255, 192);
 }
+
+.club-form-container{
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  bottom: 0;
+  background-color: black;
+}
+.close-button{
+  color: white;
+}
