@@ -19,6 +19,7 @@ function ClubList({setSelectedClub, selectedClub}) {
 
   let adminClubs = [];
   let memberClubs = [];
+  let keywordtest = "adminClub";
 
   clubList.forEach((club) => {
     if (club.admin){
@@ -29,6 +30,20 @@ function ClubList({setSelectedClub, selectedClub}) {
     }
   })
 
+  const listMap = (clubName) => {
+    return (
+    clubName.map((club) => {
+      return(
+        <li 
+          className={selectedClub === club.club.name ? "club-name selected" : "club-name"}  
+          onClick={()=> setSelectedClub(club.club.name)}>
+          {club.club.name}
+        </li>
+      )
+    })
+    )
+  }
+
   return(
     <div className="club-list-container">
       <h2 className='club-list-header'>Your Clubs</h2>
@@ -36,15 +51,7 @@ function ClubList({setSelectedClub, selectedClub}) {
             adminClubs.length > 0 && 
             <ul className='club-sublist admin'>
               <h4 className='club-list-title'>Admin</h4>
-              {adminClubs.map((club) => {
-                return(
-                  <li 
-                    className={selectedClub === club.club.name ? "club-name selected" : "club-name"}  
-                    onClick={()=> setSelectedClub(club.club.name)}>
-                    {club.club.name}
-                  </li>
-                )
-              })}
+              {listMap(adminClubs)}
             </ul>
           }
           
@@ -52,15 +59,7 @@ function ClubList({setSelectedClub, selectedClub}) {
             memberClubs.length > 0 && 
             <ul className='club-sublist member'>
               <h4 className='club-list-title'>Member</h4>
-              {memberClubs.map((club) => {
-                return(
-                  <li 
-                    className={selectedClub === club.club.name ? "club-name selected" : "club-name"} 
-                    onClick={()=> setSelectedClub(club.club.name)}>
-                    {club.club.name}
-                  </li>
-                )
-              })}
+              {listMap(memberClubs)}
             </ul>
           }
       </div>
