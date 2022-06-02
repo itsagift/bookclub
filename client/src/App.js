@@ -12,6 +12,7 @@ function App() {
   const [postTest, setPostTest] = useState([]);
   const [selectedClub, setSelectedClub] = useState("");
   const [formVisible, setFormVisible] = useState(false)
+  const [newClub, setNewClub] = useState({})
 
   useEffect(() => {
     async function fetchUser(){
@@ -31,7 +32,7 @@ function App() {
     setUser(null)
   }
 
-  function handleCreateClub(){
+  function handleFormVisible(){
     setFormVisible(true)
   }
 
@@ -42,10 +43,10 @@ function App() {
       <div>Username is {user}</div>
       <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
       <div className='dashboard'>
-        <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} handleCreateClub={handleCreateClub}/>
+        <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} handleFormVisible={handleFormVisible}/>
         Selected Club: {selectedClub}
       </div>
-      <CreateClubForm formVisible={formVisible} setFormVisible={setFormVisible}/>
+      <CreateClubForm formVisible={formVisible} setFormVisible={setFormVisible} setNewClub={setNewClub}/>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 
 
-function ClubList({setSelectedClub, selectedClub, handleCreateClub}) {
+function ClubList({setSelectedClub, selectedClub, handleFormVisible}) {
 
   const [clubList, setClubList] = useState([]);
 
@@ -62,7 +62,7 @@ function ClubList({setSelectedClub, selectedClub, handleCreateClub}) {
         {listMap(memberClubs)}
       </ul>
     }
-    <button className="create-club-button" onClick={handleCreateClub}>
+    <button className="create-club-button" onClick={handleFormVisible}>
       Create A Club
     </button>
     </div>
