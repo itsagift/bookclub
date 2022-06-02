@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   
   get '/me', to: 'users#show'
 
+  get '/userclubs', to: 'users#clubs'
+
   # get '/clubs', to: 'clubs#index'
   # post '/clubs', to: 'clubs#create'
   # delete '/clubs/:id', to: 'clubs#destroy'
