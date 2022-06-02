@@ -2,8 +2,7 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 
 
-function ClubList({setSelectedClub, selectedClub, selectedDesc, setSelectedDesc}) {
-
+function ClubList({setSelectedClub, selectedClub}) {
   const [clubList, setClubList] = useState([]);
 
   useEffect(() => {
@@ -13,6 +12,7 @@ function ClubList({setSelectedClub, selectedClub, selectedDesc, setSelectedDesc}
       let res = await req.json();
       console.log(res)
       setClubList(res.memberships)
+      console.log(res)
     }
   }
   fetchClubs();
@@ -20,7 +20,6 @@ function ClubList({setSelectedClub, selectedClub, selectedDesc, setSelectedDesc}
 
   let adminClubs = [];
   let memberClubs = [];
-  let keywordtest = "adminClub";
 
   clubList.forEach((club) => {
     if (club.admin){
@@ -37,7 +36,8 @@ function ClubList({setSelectedClub, selectedClub, selectedDesc, setSelectedDesc}
       return(
         <li 
           className={selectedClub === club.club.name ? "club-name selected" : "club-name"}  
-          onClick={()=> {setSelectedClub(club.club.name); setSelectedDesc(club.club.description)}}>
+          onClick={()=> setSelectedClub(
+            {"name": club.club.name, "id": club.club.id, "description": club.club.description})}>
           {club.club.name}
         </li>
       )
@@ -63,6 +63,7 @@ function ClubList({setSelectedClub, selectedClub, selectedDesc, setSelectedDesc}
               {listMap(memberClubs)}
             </ul>
           }
+          
       </div>
   )
 }

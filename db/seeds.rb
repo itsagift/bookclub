@@ -20,4 +20,6 @@ m4 = Membership.create(user_id: u4.id, club_id: c1.id, admin: false)
 m5 = Membership.create(user_id: u5.id, club_id: c1.id, admin: false)
 m6 = Membership.create(user_id: u5.id, club_id: c2.id, admin: false)
 m7 = Membership.create(user_id: u3.id, club_id: c2.id, admin: false)
+
+b1 = Book.create(title: "The Lord of the Rings", author: "J.R.R. Tolkien", club_id: c1.id)
 puts 'Seeding done'
