@@ -18,8 +18,8 @@ const SignupForm = ({setUser}) => {
           setUser(res.username)
         }
         else {
-          alert(res.error)
-          // console.log(res.error)
+          alert(res.errors)
+          console.log(res.errors)
         }
     }
     
