@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
+      <NavBar setUser={setUser}/>
       <div>Username is {user}</div>
       <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
         <div className='dashboard'>

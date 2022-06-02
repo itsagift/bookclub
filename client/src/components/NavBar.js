@@ -11,16 +11,29 @@ import { NavLink } from "react-router-dom";
 //   color: "white",
 // };
 
-function NavBar() {
+function NavBar({setUser}) {
+
+    const handleLogout = async () => {
+        let req = await fetch('/logout', {
+            method: "DELETE"
+        })
+        setUser(null)
+    }
+    // async function handleLogout(){
+    //     let req = await fetch('/logout', {
+    //       method: "DELETE"
+    //     })
+    //     setUser(null)
+    //   }
   return (
     <span>
       <NavLink to="/" exact>
         Home
       </NavLink>
-      
-      <NavLink to="/logout" exact>
+      <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
+      {/* <NavLink to="/logout" exact>
         Logout
-      </NavLink>
+      </NavLink> */}
     </span>
   );
 }
