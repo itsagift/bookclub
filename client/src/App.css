@@ -32,8 +32,6 @@ body {
   overflow: hidden;
   /* background-color: pink; */
 }
-
-
 .account-form {
   display: flex;
   flex-direction: column;
