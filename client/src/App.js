@@ -5,6 +5,7 @@ import LoginForm from './components/LoginForm';
 import Login from './pages/Login';
 import SignupForm from './components/SignupForm';
 import ClubList from './components/ClubList';
+import CreateClubForm from './components/CreateClubForm';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -39,10 +40,11 @@ function App() {
     <div className="App">
       <div>Username is {user}</div>
       <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
-        <div className='dashboard'>
-          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} handleCreateClub={handleCreateClub}/>
-          Selected Club: {selectedClub}
-        </div>
+      <div className='dashboard'>
+        <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} handleCreateClub={handleCreateClub}/>
+        Selected Club: {selectedClub}
+        <CreateClubForm />
+      </div>
     </div>
   );
 }
