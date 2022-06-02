@@ -1,10 +1,11 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, Switch } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import Login from './pages/Login';
 import SignupForm from './components/SignupForm';
 import ClubList from './components/ClubList';
+import NavBar from './components/NavBar';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -29,10 +30,11 @@ function App() {
     setUser(null)
   }
 
-  if (!user) return <Login setUser={setUser} />;
+  if (!user) return <div><NavBar /><Login setUser={setUser} /></div>;
 
   return (
     <div className="App">
+      <NavBar />
       <div>Username is {user}</div>
       <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
         <div className='dashboard'>
