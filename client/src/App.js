@@ -4,6 +4,7 @@ import { Routes, Route, Link } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import Login from './pages/Login';
 import SignupForm from './components/SignupForm';
+import ClubList from './components/ClubList';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -31,39 +32,14 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+        <div className='dashboard'>
+
+        </div>
         <div>Username is {user}</div>
         <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
+
+        <ClubList/>
         
-        {/* <Link to="/new-user">
-          Sign Up
-        </Link>
-        <Link to="/existing-user">
-          Login
-        </Link>
-        <button onClick={()=> {handleLogout()}}>Logout</button>
-        <Routes>
-          <Route exact path="new-user" element={<Signup 
-            username={username} 
-            password={password} 
-            passwordConfirmation={passwordConfirmation} 
-            email={email}
-            setUsername={setUsername}
-            setPassword={setPassword}
-            setPasswordConfirmation={setPasswordConfirmation}
-            setEmail={setEmail}
-          />}>
-          </Route>
-          <Route exact path="existing-user" element={<Login
-            username={username} 
-            password={password} 
-            setUsername={setUsername}
-            setPassword={setPassword}
-            onLogin={onLogin}
-          />}>
-          </Route>
-        </Routes> */}
-      </header>
     </div>
   );
 }
