@@ -38,8 +38,11 @@ function App() {
       <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
         <div className='dashboard'>
           <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} setSelectedDesc={setSelectedDesc} selectedDesc={selectedDesc}/>
-          <div className="selected-club"> Selected Club: {selectedClub}
-          Description: {selectedDesc}
+
+          <div className="selected-club">
+            <h2>{selectedClub}</h2>
+            <i>{selectedDesc} </i>
+            
           </div> 
         </div>
     </div>
