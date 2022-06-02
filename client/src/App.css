@@ -119,3 +119,8 @@ body {
 .admin{
   background-color: rgb(255, 255, 192);
 }
+
+.book-club{
+  display: flex;
+  flex-direction: column;
+}

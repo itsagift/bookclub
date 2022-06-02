@@ -35,8 +35,9 @@ function ClubList({setSelectedClub, selectedClub}) {
     clubName.map((club) => {
       return(
         <li 
-          className={selectedClub === club.club.name ? "club-name selected" : "club-name"}  
-          onClick={()=> setSelectedClub(club.club.name)}>
+          className={selectedClub.id === club.club.id ? "club-name selected" : "club-name"}  
+          onClick={()=> setSelectedClub(
+            {"name": club.club.name, "id": club.club.id})}>
           {club.club.name}
         </li>
       )
@@ -62,6 +63,7 @@ function ClubList({setSelectedClub, selectedClub}) {
               {listMap(memberClubs)}
             </ul>
           }
+          
       </div>
   )
 }

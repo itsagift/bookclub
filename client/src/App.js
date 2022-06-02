@@ -5,11 +5,26 @@ import LoginForm from './components/LoginForm';
 import Login from './pages/Login';
 import SignupForm from './components/SignupForm';
 import ClubList from './components/ClubList';
+import AddBook from './components/AddBook';
 
 function App() {
   const [user, setUser] = useState(null);
-  const [postTest, setPostTest] = useState([]);
-  const [selectedClub, setSelectedClub] = useState("");
+  const [selectedClub, setSelectedClub] = useState({"name": "", "id": ""});
+  const [books, setBooks] = useState([]);
+
+
+  useEffect(() => {
+    async function fetchBooks(){
+      if (selectedClub.id){
+        let req = await fetch(`/${selectedClub.id}/books`)
+        if (req.ok){
+          let res = await req.json();
+          setBooks(res)
+        }
+      }
+    }
+    fetchBooks();
+  }, [selectedClub]);
 
   useEffect(() => {
     async function fetchUser(){
@@ -21,6 +36,8 @@ function App() {
     }
     fetchUser();
   }, []);
+
+  
 
   async function handleLogout(){
     let req = await fetch('/logout', {
@@ -36,8 +53,20 @@ function App() {
       <div>Username is {user}</div>
       <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
         <div className='dashboard'>
-          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub}/>
-          Selected Club: {selectedClub}
+          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} setBooks={setBooks}/>
+          
+          <div className='book-club'>
+          Selected Club: {selectedClub.name}
+            
+            {
+            books.map((book) => {
+              return(
+            <div>{book.title}</div>
+            )
+            })
+            }
+            
+          </div>
         </div>
     </div>
   );
