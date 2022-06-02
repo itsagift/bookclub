@@ -3,7 +3,6 @@ import {useEffect} from 'react';
 
 
 function ClubList({setSelectedClub, selectedClub}) {
-
   const [clubList, setClubList] = useState([]);
 
   useEffect(() => {
@@ -12,6 +11,7 @@ function ClubList({setSelectedClub, selectedClub}) {
     if (req.ok){
       let res = await req.json();
       setClubList(res.memberships)
+      console.log(res)
     }
   }
   fetchClubs();
@@ -19,7 +19,6 @@ function ClubList({setSelectedClub, selectedClub}) {
 
   let adminClubs = [];
   let memberClubs = [];
-  let keywordtest = "adminClub";
 
   clubList.forEach((club) => {
     if (club.admin){

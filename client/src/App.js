@@ -11,7 +11,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [selectedClub, setSelectedClub] = useState({"name": "", "id": ""});
   const [books, setBooks] = useState([]);
-
+  const [isAdmin, setIsAdmin] = useState(false)
 
   useEffect(() => {
     async function fetchBooks(){
@@ -20,6 +20,7 @@ function App() {
         if (req.ok){
           let res = await req.json();
           setBooks(res)
+          console.log(selectedClub.id)
         }
       }
     }
@@ -37,13 +38,27 @@ function App() {
     fetchUser();
   }, []);
 
-  
-
   async function handleLogout(){
     let req = await fetch('/logout', {
       method: "DELETE"
     })
     setUser(null)
+  }
+  async function handleBookClick(){
+    
+    let req = await fetch("/newbook", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({"club_id": `${selectedClub.id}`, "title": "test", "author": "test author"})
+    })
+    let res = await req.json()
+      if (req.ok) {
+        setBooks(prevState => [...prevState, res])
+    }
+    else {
+      alert(res.errors)
+          // console.log(res.error)
+    }
   }
 
   if (!user) return <Login setUser={setUser} />;
@@ -53,11 +68,11 @@ function App() {
       <div>Username is {user}</div>
       <button className="login-button" onClick={()=> handleLogout()}>Logout</button>
         <div className='dashboard'>
-          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} setBooks={setBooks}/>
+          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub}/>
           
           <div className='book-club'>
           Selected Club: {selectedClub.name}
-            
+          {isAdmin ? "you are admin" : "you are not admin"}
             {
             books.map((book) => {
               return(
@@ -65,7 +80,7 @@ function App() {
             )
             })
             }
-            
+            <button onClick={handleBookClick}>Add Book</button>
           </div>
         </div>
     </div>

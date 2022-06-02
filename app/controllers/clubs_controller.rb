@@ -1,6 +1,6 @@
 class ClubsController < ApplicationController
-  # before_action :authorize_club
-  # skip_before_action :authorize
+  before_action :authorize_club
+  skip_before_action :authorize_club, only: [:index, :create, :destroy, :createbook]
   # @current_user = User.find_by(id: session[:user_id])
 
   # @members = Club.memberships.all.each do |membership|
@@ -29,12 +29,21 @@ class ClubsController < ApplicationController
     render json: books
   end
 
+  def createbook
+    book = Book.create!(book_params)
+    render json: book
+  end
+
   private
 
   
 
   def club_params
     params.permit(:name, :description)
+  end
+
+  def book_params
+    params.permit(:title, :author, :club_id)
   end
 
   def authorize_club

@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/userclubs', to: 'users#clubs'
   get '/:id/books', to: 'clubs#books'
 
+  post '/newbook', to: 'clubs#createbook'
+
   # get '/clubs', to: 'clubs#index'
   # post '/clubs', to: 'clubs#create'
   # delete '/clubs/:id', to: 'clubs#destroy'
