@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function CreateClubForm({ formVisible, setFormVisible }){
+function CreateClubForm({ formVisible, setFormVisible, setNewClub }){
 
     const [clubName, setClubName] = useState('')
     const [clubDesc, setClubDesc] = useState('')
@@ -9,24 +9,31 @@ function CreateClubForm({ formVisible, setFormVisible }){
         let req = await fetch('/newclub', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({ clubName, clubDesc })
+            body: JSON.stringify({ name: clubName, description: clubDesc })
         })
-        let res = await req.json()
-        console.log(res)
+        if (req.ok){
+            let res = await req.json()
+            setFormVisible(false);
+            setNewClub(res)
+        }
+        
+        
     }
 
     return (
-        <div className="club-form-container" style={{display: formVisible ? "block" : "none"}}>
+        <div className="club-form-modal" style={{display: formVisible ? "block" : "none"}}>
+            <div className="form-container">
             <a className="close-button" href="#" onClick={() => setFormVisible(false)}>x</a>
-            <h1 style={{fontFamily: "Patrick Hand", fontSize: "40px", textAlign: "center", marginTop: "6%"}}>Start a Bookclub</h1>
+            <h1 className='club-form-title'>Start a Bookclub</h1>
             <form className="create-club-form" onSubmit={(e) => {
                 e.preventDefault();
-                handleSubmit()
+                handleSubmit();
                 }}>
                 <input type="text" className="create-club-input-text" placeholder="Name your club..." onChange={(e) => {setClubName(e.target.value)}} value={clubName}></input>
                 <textarea type="text" rows="8" className="create-club-input-text" placeholder="Describe your club..." onChange={(e) => {setClubDesc(e.target.value)}} value={clubDesc}></textarea>
                 <input type="submit" className="form-button"></input>
             </form>
+            </div>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :clubs, only: [:index, :create, :destroy]
   resources :memberships, only: [:index, :create, :destroy]
-  resources :books, only: [:index]
+  resources :books, only: [:index, :destroy]
   post '/signup', to: 'users#create'
   post '/login', to: 'sessions#create'
   delete "/logout", to: "sessions#destroy"
@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/userclubs', to: 'users#clubs'
   get '/:id/books', to: 'clubs#books'
 
-  post '/newbook', to: 'clubs#createbook'
+  post '/:id/newbook', to: 'clubs#createbook'
 
   post '/newclub', to: "clubs#create"
 

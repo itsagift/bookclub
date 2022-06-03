@@ -1,23 +1,28 @@
 import {useState} from 'react';
 import {useEffect} from 'react';
+import CreateClubForm from './CreateClubForm';
 
-
-function ClubList({setSelectedClub, selectedClub, handleFormVisible}) {
+function ClubList({setSelectedClub, selectedClub}) {
 
   const [clubList, setClubList] = useState([]);
+  const [formVisible, setFormVisible] = useState(false);
+  const [newClub, setNewClub] = useState("");
+
+  function handleFormVisible(){
+    setFormVisible(true)
+  }
 
   useEffect(() => {
   async function fetchClubs(){
     let req = await fetch('/userclubs')
     if (req.ok){
       let res = await req.json();
-      console.log(res)
       setClubList(res.memberships)
-      console.log(res)
+      setSelectedClub(res.memberships[0].club)
     }
   }
   fetchClubs();
-}, []);
+}, [newClub]);
 
   let adminClubs = [];
   let memberClubs = [];
@@ -36,7 +41,7 @@ function ClubList({setSelectedClub, selectedClub, handleFormVisible}) {
     clubName.map((club) => {
       return(
         <li 
-          className={selectedClub === club.club.name ? "club-name selected" : "club-name"}  
+          className={selectedClub.name === club.club.name ? "club-name selected" : "club-name"}  
           onClick={()=> setSelectedClub(
             {"name": club.club.name, "id": club.club.id, "description": club.club.description})}>
           {club.club.name}
@@ -67,6 +72,7 @@ function ClubList({setSelectedClub, selectedClub, handleFormVisible}) {
     <button className="create-club-button" onClick={handleFormVisible}>
       Create A Club
     </button>
+    <CreateClubForm formVisible={formVisible} setFormVisible={setFormVisible} setNewClub={setNewClub}/>
     </div>
   )
 }

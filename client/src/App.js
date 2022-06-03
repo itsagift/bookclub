@@ -7,14 +7,13 @@ import SignupForm from './components/SignupForm';
 import ClubList from './components/ClubList';
 import NavBar from './components/NavBar';
 import CreateClubForm from './components/CreateClubForm';
+import BookList from './components/BookList';
 
 function App() {
   const [user, setUser] = useState(null);
   const [selectedClub, setSelectedClub] = useState({"name": "", "id": "", "description": ""});
   const [books, setBooks] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false)
-  const [formVisible, setFormVisible] = useState(false)
-  const [newClub, setNewClub] = useState({})
 
   useEffect(() => {
     async function fetchBooks(){
@@ -23,7 +22,6 @@ function App() {
         if (req.ok){
           let res = await req.json();
           setBooks(res)
-          console.log(selectedClub.id)
         }
       }
     }
@@ -43,7 +41,7 @@ function App() {
 
   async function handleBookClick(){
     
-    let req = await fetch("/newbook", {
+    let req = await fetch(`/${selectedClub.id}/newbook`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({"club_id": `${selectedClub.id}`, "title": "test", "author": "test author"})
@@ -53,14 +51,12 @@ function App() {
         setBooks(prevState => [...prevState, res])
     }
     else {
-      alert(res.errors)
+      alert(res.error)
           // console.log(res.error)
     }
   }
 
-  function handleFormVisible(){
-    setFormVisible(true)
-  }
+  
 
   if (!user) return <Login setUser={setUser} />;
 
@@ -69,25 +65,16 @@ function App() {
       <NavBar user={user} setUser={setUser}/>
       <div>Username is {user}</div>
         <div className='dashboard'>
-          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} handleFormVisible={handleFormVisible}/>
+          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} />
 
           <div className="selected-club">
-            <h2>{selectedClub.name}</h2>
+            <h2 className='selected-club-title'>{selectedClub.name}</h2>
             <i>{selectedClub.description} </i>
             
           {/* {isAdmin ? "you are admin" : "you are not admin"} */}
-          <div>
-            {
-            books.map((book) => {
-              return(
-            <div>{book.title}</div>
-            )
-            })
-            }
-            <button onClick={handleBookClick}>Add Book</button>
-          </div> 
+          <BookList books={books} handleBookClick={handleBookClick} setBooks={setBooks}/>
           </div>
-          <CreateClubForm formVisible={formVisible} setFormVisible={setFormVisible} setNewClub={setNewClub}/>
+          
         </div>
       
     </div>
