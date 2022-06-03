@@ -5,20 +5,27 @@ function AddMemberForm({ memberFormVisible, setMemberFormVisible, setMembers, se
     const [memberName, setMemberName] = useState('')
 
     const handleSubmit = async () => {
-      console.log("membername", memberName)
         let req = await fetch(`/users/${memberName}`)
         if (req.ok){
             let res = await req.json()
-            let postreq = await fetch(`/memberships`, {
-              method: "POST",
-              headers: {"Content-Type": "application/json"},
-              body: JSON.stringify({user_id: res.id, club_id: selectedClub.id, admin: false})
+            if (res.id){
+              let postreq = await fetch(`/memberships`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({user_id: res.id, club_id: selectedClub.id, admin: false})
+              })
+              if (postreq.ok){
+                let postres = await postreq.json()
+                setMemberFormVisible(false)
+                setMembers(prevState => [...prevState, postres])
+              }
+              else{
+                alert(postreq.errors)
+              }
             }
-            )
-            let postres = await postreq.json()
-            console.log("postres", postres)
+            
+          }  
         }
-    }
   
 
     return (

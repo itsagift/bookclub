@@ -21,12 +21,10 @@ function App() {
   useEffect(() => {
     if (selectedClub.id){
     async function fetchClubMembers(){
-        console.log("selected", selectedClub)
         let req = await fetch(`/${selectedClub.id}/memberships`)
         if (req.ok){
           let res = await req.json();
           setMembers(res)
-          console.log("members", res)
         }
       }
       fetchClubMembers();
@@ -80,7 +78,7 @@ function App() {
                     members.map((member)=> {
                       return(
                       <div className={`member-item ${member.admin? "admin-item": "" }`}>
-                        <div className={`member-name ${member.admin? "admin-name": "" }`}>{`${member.user.username}`}</div>
+                        <div className={`member-name ${member.admin? "admin-name": "" }`}>{`${member.user.username}`} {member.admin ? "(Admin)" : ""}</div>
                         {!member.admin && <button className='member-delete' onClick={()=> {handleDelete(member)}}>Remove member</button>}
                       </div>
                       )
@@ -89,7 +87,7 @@ function App() {
                   }
                 </div>
                 <button onClick={()=> {handleAddMember()}}>Add new member</button>
-                <AddMemberForm memberFormVisible={memberFormVisible} setMemberFormVisible={setMemberFormVisible} setNewMember={setNewMember} selectedClub={selectedClub}/>
+                <AddMemberForm memberFormVisible={memberFormVisible} setMemberFormVisible={setMemberFormVisible} setMembers={setMembers} selectedClub={selectedClub}/>
                 </div>
               </details>
             </div>

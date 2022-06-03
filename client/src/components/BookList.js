@@ -1,8 +1,10 @@
 import {useState, useEffect} from 'react';
+import AddBookForm from './AddBookForm';
 
-function BookList ({handleBookClick, selectedClub}){
+function BookList ({selectedClub}){
   const [books, setBooks] = useState([]);
   const [likes, setLikes] = useState(0);
+  const [bookFormVisible, setBookFormVisible] = useState(false);
 
   useEffect(() => {
     async function fetchBooks(){
@@ -11,29 +13,13 @@ function BookList ({handleBookClick, selectedClub}){
         if (req.ok){
           let res = await req.json();
           setBooks(res)
-          console.log(res)
         }
       }
     }
     fetchBooks();
   }, [selectedClub, likes]);
 
-  async function handleBookClick(){
-    
-    let req = await fetch(`/${selectedClub.id}/newbook`, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({"club_id": `${selectedClub.id}`, "title": "test", "author": "test author"})
-    })
-    let res = await req.json()
-      if (req.ok) {
-        setBooks(prevState => [...prevState, res])
-    }
-    else {
-      alert(res.error)
-          // console.log(res.error)
-    }
-  }
+  
 
   async function handleDeleteBook(id){
     let req = await fetch(`/books/${id}`, {
@@ -51,13 +37,16 @@ function BookList ({handleBookClick, selectedClub}){
       body: JSON.stringify({likes: book.likes + 1})
     })
     let res = await req.json();
-    console.log("response", res)
     setLikes(res.likes)
   }
 
   function sortIds(a, b) {
     return a.id - b.id;
   };
+
+  function handleBookModal(){
+    setBookFormVisible(true);
+  }
 
 return(
   <div className='book-list-container'>
@@ -85,7 +74,8 @@ return(
         })
       }
       </ul>
-    <button onClick={handleBookClick}>Add Book</button>
+    <button onClick={handleBookModal}>Add Book</button>
+    <AddBookForm bookFormVisible={bookFormVisible} setBookFormVisible={setBookFormVisible} setBooks={setBooks} selectedClub={selectedClub}/>
   </div> 
 )
 }
