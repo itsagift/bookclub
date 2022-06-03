@@ -8,25 +8,31 @@ import ClubList from './components/ClubList';
 import NavBar from './components/NavBar';
 import CreateClubForm from './components/CreateClubForm';
 import BookList from './components/BookList';
+import AddMemberForm from './components/AddMemberForm';
 
 function App() {
   const [user, setUser] = useState(null);
   const [selectedClub, setSelectedClub] = useState({"name": "", "id": "", "description": ""});
-  const [books, setBooks] = useState([]);
-  const [isAdmin, setIsAdmin] = useState(false)
-
+  const [members, setMembers] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [memberFormVisible, setMemberFormVisible] = useState(false);
+  const [member, setNewMember] = useState(false);
+  
   useEffect(() => {
-    async function fetchBooks(){
-      if (selectedClub.id){
-        let req = await fetch(`/${selectedClub.id}/books`)
+    if (selectedClub.id){
+    async function fetchClubMembers(){
+        console.log("selected", selectedClub)
+        let req = await fetch(`/${selectedClub.id}/memberships`)
         if (req.ok){
           let res = await req.json();
-          setBooks(res)
+          setMembers(res)
+          console.log("members", res)
         }
       }
+      fetchClubMembers();
     }
-    fetchBooks();
-  }, [selectedClub]);
+  }, [selectedClub.id]);
+  
 
   useEffect(() => {
     async function fetchUser(){
@@ -39,23 +45,18 @@ function App() {
     fetchUser();
   }, []);
 
-  async function handleBookClick(){
-    
-    let req = await fetch(`/${selectedClub.id}/newbook`, {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({"club_id": `${selectedClub.id}`, "title": "test", "author": "test author"})
+  async function handleDelete(member){
+    let req = await fetch(`/memberships/${member.id}`, {
+      method: "DELETE"
     })
-    let res = await req.json()
-      if (req.ok) {
-        setBooks(prevState => [...prevState, res])
-    }
-    else {
-      alert(res.error)
-          // console.log(res.error)
-    }
+    setMembers(prevState => prevState.filter((newMember) => {
+      return newMember.id != member.id
+    }))
   }
 
+  function handleAddMember(){
+    setMemberFormVisible(true);
+  }
   
 
   if (!user) return <Login setUser={setUser} />;
@@ -63,16 +64,37 @@ function App() {
   return (
     <div className="App">
       <NavBar user={user} setUser={setUser}/>
-      <div>Username is {user}</div>
+      
         <div className='dashboard'>
           <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} />
 
           <div className="selected-club">
             <h2 className='selected-club-title'>{selectedClub.name}</h2>
             <i>{selectedClub.description} </i>
-            
-          {/* {isAdmin ? "you are admin" : "you are not admin"} */}
-          <BookList books={books} handleBookClick={handleBookClick} setBooks={setBooks}/>
+            <div className='members-dropdown-container'>
+              <details>
+                <summary>Members</summary>
+                <div className='members-list-container'>
+                  <div className='members-list'>
+                  {
+                    members.map((member)=> {
+                      return(
+                      <div className={`member-item ${member.admin? "admin-item": "" }`}>
+                        <div className={`member-name ${member.admin? "admin-name": "" }`}>{`${member.user.username}`}</div>
+                        {!member.admin && <button className='member-delete' onClick={()=> {handleDelete(member)}}>Remove member</button>}
+                      </div>
+                      )
+                      
+                    })
+                  }
+                </div>
+                <button onClick={()=> {handleAddMember()}}>Add new member</button>
+                <AddMemberForm memberFormVisible={memberFormVisible} setMemberFormVisible={setMemberFormVisible} setNewMember={setNewMember} selectedClub={selectedClub}/>
+                </div>
+              </details>
+            </div>
+          
+          <BookList selectedClub={selectedClub}/>
           </div>
           
         </div>

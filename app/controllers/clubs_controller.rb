@@ -21,6 +21,7 @@ class ClubsController < ApplicationController
     render json: club
   end
 
+
   def destroy
     club = Club.find_by(id: params[:id])
     club.destroy

@@ -82,6 +82,7 @@ body {
 .dashboard{
   display: flex;
   padding: 0 2%;
+  
 }
 
 .club-list-container{
@@ -90,6 +91,9 @@ body {
   align-self: flex-start;
 }
 
+.club-list-header{
+  font-size: 28px;
+}
 
 
 .club-sublist{
@@ -130,6 +134,12 @@ body {
 .selected-club{
   margin-left: 7%;
   width: 45%;
+  border: 1px solid #bbb;
+  width: 60%;
+  padding: 20px 30px;
+}
+.selected-club-title{
+  font-size: 28px;
 }
 .club-form-modal{
   left: 0;
@@ -179,7 +189,6 @@ body {
   list-style: none;
   margin: 0;
   padding: 0;
-  
 }
 
 .book-list-item{
@@ -190,17 +199,99 @@ body {
   border-bottom: 1px solid #bbb;
 }
 
+.list-left{
+  display: flex;
+}
+
+.list-item-image{
+  width:40px;
+  margin-right: 0;
+}
+
 .book-list-item:last-child{
   border-bottom: none;
 }
 
-.list-item-delete{
-  margin-left: 0;
+.list-item-text{
+  margin-left: 10px;
 }
 
+.list-right{
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+}
+.heart-emoji{
+  margin-right: 20px;
+  margin-left: 5px;
+}
+
+.list-item-title{
+  font-weight: bold;
+  font-size: 20px;
+}
 .club-form-title{
   margin: 0;
   font-size: "40px";
   font-family: "Patrick Hand";
   text-align: center;
 }
+
+.nav-bar{
+  display: flex;
+  padding: 20px 2%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-bar-buttons{
+  height: auto;
+}
+
+.nav-bar-welcome{
+  margin-left: 0;
+}
+
+.logout-button{
+  font-family: 'Patrick Hand';
+  font-size: 1.25rem;
+  background: black;
+  color: white;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+.members-list-container{
+  margin-top: 5px;
+  
+  width: 50%;
+}
+
+.member-item{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgb(183, 219, 239);
+}
+
+.member-item:last-child{
+  border-bottom: none;
+}
+
+.member-delete{
+  margin-right:0;
+}
+
+.admin-item{
+  background-color: rgb(236, 248, 255);
+}
+
+.members-dropdown-container{
+  margin-top: 25px;
+}
+
+.member-name{
+  margin-right: 10px;
+}
+
+

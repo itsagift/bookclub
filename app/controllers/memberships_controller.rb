@@ -13,13 +13,17 @@ class MembershipsController < ApplicationController
    else
      render json: {"error": membership.errors.full_messages}, status: :unprocessable_entity
    end
-    render json: membership, status: :created
   end
 
   def destroy
     membership = Membership.find_by(id: params[:id])
     membership.destroy 
     head :no_content
+  end
+
+  def club_memberships
+    memberships = Membership.where(club_id: params[:id])
+    render json: memberships
   end
   
   private

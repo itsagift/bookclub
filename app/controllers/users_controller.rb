@@ -11,6 +11,11 @@ class UsersController < ApplicationController
         end
     end
 
+    def find
+        user = User.find_by(username: params[:username])
+        render json: user
+    end
+
     def show
         render json: @current_user
     end

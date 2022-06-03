@@ -23,7 +23,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.permit(:library_url)
+    params.permit(:likes)
   end
 
   def render_unprocessable_entity_response(exception)

@@ -1,5 +1,5 @@
 class MembershipSerializer < ActiveModel::Serializer
-  attributes :club, :admin
+  attributes :id, :club, :admin
 
   belongs_to :user
   belongs_to :club

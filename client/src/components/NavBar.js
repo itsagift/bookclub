@@ -10,11 +10,14 @@ function NavBar({setUser, user}) {
         setUser(null)
     }
 
-    if (!user) {
-        return <span><NavLink to="/" exact><button className="login-button">Home</button></NavLink></span>
-        }
-      return <span><NavLink to="/" exact><button className="login-button">Home</button></NavLink>
-      <button className="login-button" onClick={()=> handleLogout()}>Logout</button></span>
+        
+        return (
+        <div className="nav-bar">
+            <div className="nav-bar-buttons"><NavLink to="/" exact><button className="logout-button">Home</button></NavLink>
+            <button className="logout-button" onClick={()=> handleLogout()}>Logout</button></div>
+            <div className="nav-bar-welcome">Welcome, {user}</div>
+        </div>
+        )
         
 }
 
