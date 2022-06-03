@@ -6,12 +6,15 @@ import Login from './pages/Login';
 import SignupForm from './components/SignupForm';
 import ClubList from './components/ClubList';
 import NavBar from './components/NavBar';
+import CreateClubForm from './components/CreateClubForm';
 
 function App() {
   const [user, setUser] = useState(null);
   const [selectedClub, setSelectedClub] = useState({"name": "", "id": "", "description": ""});
   const [books, setBooks] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false)
+  const [formVisible, setFormVisible] = useState(false)
+  const [newClub, setNewClub] = useState({})
 
   useEffect(() => {
     async function fetchBooks(){
@@ -55,14 +58,18 @@ function App() {
     }
   }
 
-  if (!user) return <div><NavBar /><Login setUser={setUser} /></div>;
+  function handleFormVisible(){
+    setFormVisible(true)
+  }
+
+  if (!user) return <Login setUser={setUser} />;
 
   return (
     <div className="App">
       <NavBar user={user} setUser={setUser}/>
       <div>Username is {user}</div>
         <div className='dashboard'>
-          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub}/>
+          <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub} handleFormVisible={handleFormVisible}/>
 
           <div className="selected-club">
             <h2>{selectedClub.name}</h2>
@@ -80,7 +87,9 @@ function App() {
             <button onClick={handleBookClick}>Add Book</button>
           </div> 
           </div>
+          <CreateClubForm formVisible={formVisible} setFormVisible={setFormVisible} setNewClub={setNewClub}/>
         </div>
+      
     </div>
   );
 }

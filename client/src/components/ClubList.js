@@ -2,7 +2,8 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 
 
-function ClubList({setSelectedClub, selectedClub}) {
+function ClubList({setSelectedClub, selectedClub, handleFormVisible}) {
+
   const [clubList, setClubList] = useState([]);
 
   useEffect(() => {
@@ -47,24 +48,26 @@ function ClubList({setSelectedClub, selectedClub}) {
 
   return(
     <div className="club-list-container">
-      <h2 className='club-list-header'>Your Clubs</h2>
-          {
-            adminClubs.length > 0 && 
-            <ul className='club-sublist admin'>
-              <h4 className='club-list-title'>Admin</h4>
-              {listMap(adminClubs)}
-            </ul>
-          }
+    <h2 className='club-list-header'>Your Clubs</h2>
+    {
+      adminClubs.length > 0 && 
+      <ul className='club-sublist admin'>
+        <h4 className='club-list-title'>Admin</h4>
+        {listMap(adminClubs)}
+      </ul>
+    }
           
-          {
-            memberClubs.length > 0 && 
-            <ul className='club-sublist member'>
-              <h4 className='club-list-title'>Member</h4>
-              {listMap(memberClubs)}
-            </ul>
-          }
-          
-      </div>
+    {
+      memberClubs.length > 0 && 
+      <ul className='club-sublist member'>
+        <h4 className='club-list-title'>Member</h4>
+        {listMap(memberClubs)}
+      </ul>
+    }
+    <button className="create-club-button" onClick={handleFormVisible}>
+      Create A Club
+    </button>
+    </div>
   )
 }
 

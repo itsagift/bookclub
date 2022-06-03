@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   post '/newbook', to: 'clubs#createbook'
 
+  post '/newclub', to: "clubs#create"
+
   # get '/clubs', to: 'clubs#index'
   # post '/clubs', to: 'clubs#create'
   # delete '/clubs/:id', to: 'clubs#destroy'
