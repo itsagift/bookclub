@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import SignupForm from './components/SignupForm';
 import ClubList from './components/ClubList';
 import NavBar from './components/NavBar';
+import BookList from './components/BookList';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -65,20 +66,11 @@ function App() {
           <ClubList setSelectedClub={setSelectedClub} selectedClub={selectedClub}/>
 
           <div className="selected-club">
-            <h2>{selectedClub.name}</h2>
+            <h2 className='selected-club-title'>{selectedClub.name}</h2>
             <i>{selectedClub.description} </i>
             
           {/* {isAdmin ? "you are admin" : "you are not admin"} */}
-          <div>
-            {
-            books.map((book) => {
-              return(
-            <div>{book.title}</div>
-            )
-            })
-            }
-            <button onClick={handleBookClick}>Add Book</button>
-          </div> 
+          <BookList books={books} handleBookClick={handleBookClick} setBooks={setBooks}/>
           </div>
         </div>
     </div>
