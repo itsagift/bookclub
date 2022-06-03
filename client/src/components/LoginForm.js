@@ -1,18 +1,10 @@
-
-import {useState} from 'react';
-
-const LoginForm = ({setUser}) => {
-
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  // const [passwordConfirmation, setPasswordConfirmation] = useState('')
-  // const [email, setEmail] = useState('')
+function LoginForm({setUser}){
 
     const handleLogin = async () => {
+      let form = new FormData(document.querySelector('#login-form'))
         let req = await fetch('/login', {
           method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({ username, password })
+          body: form
         })
         let res = await req.json()
         if (req.status === 201) {
@@ -20,18 +12,16 @@ const LoginForm = ({setUser}) => {
         }
         else {
           alert(res.error)
-          // console.log(res.error)
         }
     }
     
-
     return (
-        <form className="account-form" action="/login" method="POST" onSubmit={(e) => {
+        <form id="login-form" className="account-form" action="/login" method="POST" onSubmit={(e) => {
             e.preventDefault();
             handleLogin()
             }}>
-            <input type="text" className="input-text" onChange={(e) => setUsername(e.target.value)} value={username} placeholder="Username"></input>
-            <input type="password" className="input-text" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password"></input>
+            <input type="text" className="input-text" name="username" placeholder="Username"></input>
+            <input type="password" className="input-text" name="password" placeholder="Password"></input>
             <input type="submit" className='form-button' value="Login"></input>
           </form>
     )

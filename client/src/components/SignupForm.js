@@ -1,17 +1,10 @@
-import {useState} from 'react';
-
-const SignupForm = ({setUser}) => {
-
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirmation, setPasswordConfirmation] = useState('')
-  const [email, setEmail] = useState('')
+function SignupForm ({setUser}) {
 
     const handleSignUp = async () => {
+      let form = new FormData(document.querySelector('#signup-form'))
         let req = await fetch('/signup', {
           method: "POST",
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({username, email, password, password_confirmation: passwordConfirmation})
+          body: form
         })
         let res = await req.json();
         if (req.ok) {
@@ -19,19 +12,18 @@ const SignupForm = ({setUser}) => {
         }
         else {
           alert(res.errors)
-          console.log(res.errors)
         }
     }
     
     return (
-        <form className="account-form" onSubmit={(e) => {
+        <form id="signup-form" className="account-form" onSubmit={(e) => {
             e.preventDefault();
             handleSignUp()
             }}>
-            <input type="text" className="input-text" onChange={(e) => setUsername(e.target.value)} value={username} placeholder="Username"></input>
-            <input type="email" className="input-text" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Email"></input>
-            <input type="password" className="input-text" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password"></input>
-            <input type="password" className="input-text" onChange={(e) => setPasswordConfirmation(e.target.value)} value={passwordConfirmation} placeholder="Confirm Password"></input>
+            <input type="text" className="input-text" name="username" placeholder="Username"></input>
+            <input type="email" className="input-text" name="email" placeholder="Email"></input>
+            <input type="password" className="input-text" name="password" placeholder="Password"></input>
+            <input type="password" className="input-text" name="passwordconfirmation" placeholder="Confirm Password"></input>
             <input type="submit" className='form-button' value="Sign Up"></input>
           </form>
     )
